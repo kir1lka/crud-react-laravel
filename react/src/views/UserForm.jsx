@@ -107,7 +107,7 @@ export default function UserForm() {
                             placeholder="Пароль"
                         ></input>
                         <input
-                            type="password_confirmation"
+                            type="password"
                             // value={user.password_confirmation}
                             onChange={(ev) =>
                                 setUser({

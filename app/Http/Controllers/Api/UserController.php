@@ -18,8 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return UserResource::collection(User::query()->orderBy('id', 'asc')->get());
-        // return UserResource::collection(User::query()->orderBy('id', 'desc')->paginate(10));
+        return UserResource::collection(User::query()->orderBy('id', 'asc')->paginate(10));
     }
 
     /**
@@ -57,7 +56,6 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-
         $validated = $request->validated();
 
         if (isset($validated['passport'])) {

@@ -8,18 +8,27 @@ export default function Users() {
     const [loading, setLoading] = useState(false);
     const { setNotification } = useStateContext();
 
+    //pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const [lastPage, setLastPage] = useState(10);
+    const pageNumbers = [...Array(lastPage + 1).keys()].slice(1);
+
     useEffect(() => {
-        getUsers();
+        getUsers(currentPage, true);
     }, []);
 
     //function
-    const getUsers = () => {
-        setLoading(true);
+    const getUsers = (page = 1, loadingTable = false) => {
+        setLoading(loadingTable);
         axiosManager
-            .get("/users")
+            .get(`/users?page=${page}`)
             .then((res) => {
                 setLoading(false);
                 setUsers(res.data.data);
+
+                setCurrentPage(res.data.meta.current_page);
+                // console.log(res.data.meta.last_page);
+                setLastPage(res.data.meta.last_page);
                 // console.log(res.data);
             })
             .catch(() => {
@@ -52,16 +61,17 @@ export default function Users() {
                     alignItems: "center",
                 }}
             >
-                <h1>Пользователи</h1>
+                <h1 className="text-3xl">Пользователи</h1>
                 <Link
                     to="/users/new"
-                    className="btn btn-add"
-                    style={{ padding: 15, fontSize: 16 }}
+                    className=" btn btn-add  "
+                    style={{ padding: 10, fontSize: 16 }}
                 >
                     Добавить
                 </Link>
             </div>
 
+            {/* table */}
             <div className="card animated fadeInDown">
                 <table>
                     <thead>
@@ -116,6 +126,41 @@ export default function Users() {
                     )}
                 </table>
             </div>
+
+            {/* pagination */}
+            {loading ? (
+                <>{/* <p>Загрузка...</p> */}</>
+            ) : (
+                <div>
+                    <button
+                        onClick={() => getUsers(currentPage - 1)}
+                        disabled={currentPage === 1}
+                        className=""
+                    >
+                        Назад
+                    </button>
+                    {pageNumbers.map((page, i) => {
+                        return (
+                            <button
+                                key={i}
+                                onClick={() => getUsers(page)}
+                                style={{
+                                    background:
+                                        currentPage === page ? "pink" : "white",
+                                }}
+                            >
+                                {page}
+                            </button>
+                        );
+                    })}
+                    <button
+                        onClick={() => getUsers(currentPage + 1)}
+                        disabled={currentPage === lastPage}
+                    >
+                        Дальше
+                    </button>
+                </div>
+            )}
         </div>
     );
 }
