@@ -54,60 +54,66 @@ export default function Users() {
     return (
         <div>
             {/* header */}
-            <div
-                style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                }}
-            >
-                <h1 className="text-3xl">Пользователи</h1>
+            <div className="flex items-center justify-between">
+                <h1 className="font-bold text-2xl text-black">Пользователи</h1>
                 <Link
                     to="/users/new"
-                    className=" btn btn-add  "
-                    style={{ padding: 10, fontSize: 16 }}
+                    className="py-3 px-4 rounded-md font-semibold bg-green-500 text-white hover:bg-green-600 hover:text-white transition-all duration-200"
                 >
                     Добавить
                 </Link>
             </div>
 
             {/* table */}
-            <div className="card animated fadeInDown">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
+            {/* className="card animated fadeInDown" */}
+            <div className="bg-white rounded-lg shadow-md p-6 mb-4 mt-2 animated fadeInDown">
+                <table className="w-full border-spacing-0 border-collapse ">
+                    <thead className="text-left  bg-gray-300 rounded-lg">
+                        <tr className="text-left  bg-gray-300 rounded-lg">
+                            <th className="p-2 rounded-l-lg">ID</th>
                             <th>Имя</th>
                             <th>Почта</th>
                             <th>Дата создания</th>
-                            <th>Действия</th>
+                            <th className="p-2 rounded-r-lg">Действия</th>
                         </tr>
                     </thead>
 
                     {loading && (
-                        <tbody>
-                            <tr>
-                                <td colSpan="5" className="text-center">
-                                    <div className="simple-spinnerr">
+                        <tbody className="p-2 whitespace-nowrap border-b-2">
+                            <tr className="p-2 whitespace-nowrap border-b-2">
+                                <td className="p-2 whitespace-nowrap border-b-2 ">
+                                    {/* <div className="simple-spinnerr">
                                         <p></p>
-                                    </div>
+                                    </div> */}
+                                    Загрузка...
                                 </td>
                             </tr>
                         </tbody>
                     )}
 
                     {!loading && (
-                        <tbody>
+                        <tbody className="p-2 whitespace-nowrap border-b-2">
                             {users.map((user, index) => (
-                                <tr key={index}>
-                                    <td>{user.id}</td>
-                                    <td>{user.name}</td>
-                                    <td>{user.email}</td>
-                                    <td>{user.created_at}</td>
-                                    <td>
+                                <tr
+                                    key={index}
+                                    className="p-2  whitespace-nowrap border-b-2"
+                                >
+                                    <td className="py-2 pl-1 whitespace-nowrap border-b-2">
+                                        {user.id}
+                                    </td>
+                                    <td className="py-2 whitespace-nowrap border-b-2">
+                                        {user.name}
+                                    </td>
+                                    <td className="py-2 whitespace-nowrap border-b-2">
+                                        {user.email}
+                                    </td>
+                                    <td className="py-2 whitespace-nowrap border-b-2">
+                                        {user.created_at}
+                                    </td>
+                                    <td className="py-2 whitespace-nowrap border-b-2">
                                         <Link
                                             to={"/users/" + user.id}
-                                            className="btn-edit"
+                                            className="py-3 px-4  rounded-md font-semibold bg-yellow-500 text-white hover:bg-yellow-600 hover:text-white transition-all duration-200"
                                             style={{ padding: 15, height: 50 }}
                                         >
                                             Редактировать
@@ -115,7 +121,7 @@ export default function Users() {
                                         &nbsp;
                                         <button
                                             onClick={() => onClickDelete(user)}
-                                            className="btn-delete"
+                                            className="py-3 px-4  rounded-md font-semibold bg-red-600 text-white hover:bg-red-700 hover:text-white transition-all duration-200"
                                         >
                                             Удалить
                                         </button>
@@ -129,13 +135,13 @@ export default function Users() {
 
             {/* pagination */}
             {loading ? (
-                <>{/* <p>Загрузка...</p> */}</>
+                <></>
             ) : (
-                <div>
+                <div className="mt-10 mb-10 flex justify-center">
                     <button
                         onClick={() => getUsers(currentPage - 1)}
                         disabled={currentPage === 1}
-                        className=""
+                        className="py-1 px-3 text-base border bg-white border-gray-300 text-gray-500 hover:bg-violet-300 hover:text-gray-900 font-semibold rounded-l-lg"
                     >
                         Назад
                     </button>
@@ -144,9 +150,11 @@ export default function Users() {
                             <button
                                 key={i}
                                 onClick={() => getUsers(page)}
+                                className="py-1 px-3  text-base border bg-white border-gray-300 text-gray-500 hover:bg-violet-300 hover:text-gray-900 font-semibold "
                                 style={{
                                     background:
-                                        currentPage === page ? "pink" : "white",
+                                        currentPage === page ? "#7c3aed" : "",
+                                    color: currentPage === page ? "white" : "",
                                 }}
                             >
                                 {page}
@@ -156,6 +164,7 @@ export default function Users() {
                     <button
                         onClick={() => getUsers(currentPage + 1)}
                         disabled={currentPage === lastPage}
+                        className="py-1 px-3  text-base bg-white border border-gray-300 text-gray-500 hover:bg-violet-300 hover:text-gray-900 font-semibold rounded-r-lg"
                     >
                         Дальше
                     </button>

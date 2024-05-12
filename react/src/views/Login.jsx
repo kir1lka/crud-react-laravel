@@ -10,11 +10,11 @@ export default function Login() {
 
     const { setUser, setToken } = useStateContext();
 
-    const emailRef = useRef();
-    const passwordRef = useRef();
+    const emailRef = useRef < HTMLInputElement > null;
+    const passwordRef = useRef < HTMLInputElement > null;
 
     //function
-    const onSubmit = (e) => {
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoadingResponse(true);
 
@@ -46,34 +46,42 @@ export default function Login() {
             });
     };
     return (
-        <div className="login-signup-form animated fadeInDown">
-            <div className="form">
+        <div className="flex h-screen justify-center items-center animated fadeInDown">
+            <div className="bg-white rounded-lg shadow-sm p-6 mb-4 mt-2 w-96">
                 <form action="" onSubmit={onSubmit}>
-                    <h1 className="title">Вход в систему</h1>
+                    <h1 className="font-semibold text-2xl text-black text-center mb-4">
+                        Вход в систему
+                    </h1>
                     {errors && (
-                        <div className="alert">
+                        <div className="p-4 bg-red-500 text-white rounded-lg mb-4">
                             {Object.keys(errors).map((key) => (
                                 <p key={key}>{errors[key][0]}</p>
                             ))}
                         </div>
                     )}
-                    <input ref={emailRef} type="email" placeholder="Почта" />
+                    <input
+                        ref={emailRef}
+                        type="email"
+                        placeholder="Почта"
+                        className="bg-white w-full border-2 border-gray-300 p-4 mb-4 box-border text-sm transition-all duration-300 rounded-lg focus:outline-2 focus:outline-violet-500 "
+                    />
                     <input
                         ref={passwordRef}
                         type="password"
                         placeholder="Пароль"
+                        className="bg-white w-full border-2 border-gray-300 p-4 mb-4 box-border text-sm transition-all duration-300 rounded-lg focus:outline-2 focus:outline-violet-500 "
                     />
-                    <button className="btn btn-block">
-                        {loadingResponse ? (
-                            <div className="simple-spinner">
-                                <span></span>
-                            </div>
-                        ) : (
-                            "Войти"
-                        )}
+                    <button className="py-3 px-4 w-full rounded-md font-semibold bg-violet-500 text-white hover:bg-violet-600 hover:text-white transition-all duration-200 mb-4">
+                        {loadingResponse ? <div>Загрузка...</div> : "Войти"}
                     </button>
-                    <p className="message">
-                        Нет аккаунта? <Link to="/signup">Создать</Link>
+                    <p className="text-black text-base">
+                        Нет аккаунта?{" "}
+                        <Link
+                            to="/signup"
+                            className="text-violet-500 font-bold hover:text-violet-600"
+                        >
+                            Создать
+                        </Link>
                     </p>
                 </form>
             </div>
