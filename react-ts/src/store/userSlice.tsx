@@ -1,25 +1,57 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import axiosManager from "../axios-client";
 
-const initialState: User = {
-    name: "",
-    email: "",
-    password: "",
+interface UserState {
+    user: User | null;
+    loading: boolean;
+    error: string | null | undefined;
+}
+
+const initialState: UserState = {
+    user: null,
+    loading: false,
+    error: null,
 };
+
+export const getUser = createAsyncThunk<
+    User,
+    undefined,
+    { rejectValue: string }
+>("user/getUser", async function (_, { rejectWithValue }) {
+    try {
+        const response = await axiosManager.get("/user");
+        return response.data;
+    } catch (error: any) {
+        return rejectWithValue(error.message);
+    }
+});
 
 const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
         setUser(state, action: PayloadAction<User>) {
-            state.name = action.payload.name;
-            state.email = action.payload.email;
-            state.password = action.payload.password;
+            state.user = action.payload;
         },
         removeUser(state) {
-            state.name = null;
-            state.email = null;
-            state.password = null;
+            state.user = null;
         },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(getUser.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(getUser.fulfilled, (state, action) => {
+                state.loading = false;
+                state.user = action.payload;
+                state.error = null;
+            })
+            .addCase(getUser.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            });
     },
 });
 

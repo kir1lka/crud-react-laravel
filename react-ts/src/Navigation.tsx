@@ -5,6 +5,7 @@ import { DefaultLayout } from "./layouts/DefaultLayout";
 import { Login } from "./views/Login";
 import { Signup } from "./views/Signup";
 import { Users } from "./views/Users";
+import { Dashboard } from "./views/Dashboard";
 
 const RouterNav = createBrowserRouter([
     {
@@ -13,7 +14,7 @@ const RouterNav = createBrowserRouter([
         children: [
             { path: "/", element: <Navigate to="/users" /> },
             { path: "/users", element: <Users /> },
-            //   { path: "/dashboard", element: <Dashboard /> },
+            { path: "/dashboard", element: <Dashboard /> },
             //   { path: "/users/new", element: <UserForm key="userCreate" /> },
             //   { path: "/users/:id", element: <UserForm key="userUpdate" /> },
         ],

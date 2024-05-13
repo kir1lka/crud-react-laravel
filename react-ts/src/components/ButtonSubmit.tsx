@@ -1,8 +1,12 @@
 type ButtonSubmitProps = {
     loading: boolean;
+    text: string;
 };
 
-export const ButtonSubmit: React.FC<ButtonSubmitProps> = ({ loading }) => {
+export const ButtonSubmit: React.FC<ButtonSubmitProps> = ({
+    loading,
+    text,
+}) => {
     return (
         <button className="h-14 w-full rounded-md font-semibold text-base bg-violet-500 text-white hover:bg-violet-600 hover:text-white transition-all duration-200 mb-4 border-2 border-violet-600 active:bg-violet-800">
             {loading ? (
@@ -14,7 +18,7 @@ export const ButtonSubmit: React.FC<ButtonSubmitProps> = ({ loading }) => {
                     </div>
                 </div>
             ) : (
-                "Создать"
+                text
             )}
         </button>
     );

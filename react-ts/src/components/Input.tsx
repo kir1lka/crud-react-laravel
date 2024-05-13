@@ -28,7 +28,7 @@ export const Input: React.FC<InputProps> = ({
                             ref={inputRef}
                             type={showPassword ? "text" : "password"}
                             placeholder={placeholder}
-                            className="bg-white w-full border-2 border-gray-300 p-4  box-border text-sm rounded-lg focus:outline-2 focus:outline-violet-600 pr-12"
+                            className="bg-white w-full border-2 border-gray-300 p-4  box-border rounded-lg focus:outline-2 focus:outline-violet-600 pr-12 text-base"
                         />
                         {type === "password" && (
                             <button
@@ -51,7 +51,7 @@ export const Input: React.FC<InputProps> = ({
                         ref={inputRef}
                         type={type}
                         placeholder={placeholder}
-                        className="bg-white w-full border-2 border-gray-300 p-4  box-border text-sm rounded-lg focus:outline-2 focus:outline-violet-600 pr-12"
+                        className="bg-white w-full border-2 border-gray-300 p-4  box-border  rounded-lg focus:outline-2 focus:outline-violet-600 pr-12 text-base"
                     />
                 )}
             </div>

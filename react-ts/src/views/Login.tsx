@@ -10,8 +10,8 @@ import { Input } from "../components/Input";
 import { ButtonSubmit } from "../components/ButtonSubmit";
 
 type Payload = {
-    email?: string | undefined;
-    password?: string | undefined;
+    email: string | undefined;
+    password: string | undefined;
 };
 
 export const Login: React.FC = () => {
@@ -68,7 +68,7 @@ export const Login: React.FC = () => {
                 placeholder="Пароль"
                 passwordShow={true}
             />
-            <ButtonSubmit loading={loading} />
+            <ButtonSubmit loading={loading} text="Войти" />
             <p className="text-black text-base">
                 Нет аккаунта?{" "}
                 <Link

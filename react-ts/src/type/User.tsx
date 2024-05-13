@@ -1,5 +1,8 @@
 interface User {
-    name: string | null;
-    email: string | null;
-    password: string | null;
+    id: number;
+    name: string;
+    email: string;
+    email_verified_at: string | null;
+    created_at: string;
+    updated_at: string;
 }
