@@ -1,8 +1,39 @@
+import { useEffect, useState } from "react";
+import { useAppDispatch } from "../hooks";
+import { getUsers } from "../store/usersSlice";
+
+interface UsersState {
+    users: {
+        data: User[];
+    };
+    meta: {
+        current_page: number;
+        per_page: number;
+        last_page: number;
+    };
+    loading: boolean;
+    error: string | null | undefined;
+}
+
 type PaginationProps = {
-    errors: ErrorState;
+    users: UsersState;
 };
 
-export const Pagination: React.FC<PaginationProps> = ({ errors }) => {
+export const Pagination: React.FC<PaginationProps> = ({ users }) => {
+    const dispatch = useAppDispatch();
+
+    //pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const pageNumbers = [...Array(users.meta.per_page - 1).keys()].slice(1);
+
+    useEffect(() => {
+        dispatch(getUsers(currentPage));
+    }, [currentPage]);
+
+    const handlePagination = (page: number = 1) => {
+        setCurrentPage(page);
+    };
+
     return (
         <>
             {users.loading ? (

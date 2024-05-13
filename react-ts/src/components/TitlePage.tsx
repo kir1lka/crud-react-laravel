@@ -1,13 +1,15 @@
 type TitlePageProps = {
     textTitle: string;
     visibleButton?: boolean;
-    textButton?: string;
+    children?: React.ReactNode;
+    textButton?: React.ReactNode;
 };
 
 export const TitlePage: React.FC<TitlePageProps> = ({
+    children,
     textTitle,
     visibleButton = false,
-    textButton = "button",
+    textButton = "",
 }) => {
     return (
         <div className="flex justify-between items-center mb-4">
@@ -17,8 +19,11 @@ export const TitlePage: React.FC<TitlePageProps> = ({
                 </h1>
             </div>
             {visibleButton && (
-                <button className=" px-8 h-12 rounded-md font-semibold text-base bg-green-500 text-white hover:bg-green-600 hover:border-green-700 hover:text-white transition-all duration-200  border-2 border-green-600 active:bg-green-700">
-                    {textButton}
+                <button className=" px-4 h-12 rounded-md font-semibold text-base bg-green-500 text-white hover:bg-green-600 hover:border-green-700 hover:text-white transition-all duration-200  border-2 border-green-600 active:bg-green-700">
+                    <div className="flex items-center">
+                        {textButton}
+                        {children}
+                    </div>
                 </button>
             )}
         </div>
