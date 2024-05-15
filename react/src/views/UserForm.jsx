@@ -25,7 +25,6 @@ export default function UserForm() {
                 .get(`/users/${id}`)
                 .then((res) => {
                     setUser(res.data);
-                    // console.log(res.data.data);
                     setLoading(false);
                 })
                 .catch(() => {

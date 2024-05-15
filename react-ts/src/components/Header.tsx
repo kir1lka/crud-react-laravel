@@ -15,7 +15,7 @@ export const Header: React.FC = () => {
     };
 
     return (
-        <header className="  bg-white rounded-b-lg py-5 px-6  border-b-2 border-r-2 border-l-2 border-gray-300 shadow-sm border-b flex items-center justify-between mb-4">
+        <header className="  bg-white rounded-b-lg py-5 px-6  border-b-2 border-r-2 border-l-2 border-gray-300 shadow-sm border-b flex items-center justify-between mb-2">
             <div className="flex items-center ">
                 <NavLink
                     to="/"

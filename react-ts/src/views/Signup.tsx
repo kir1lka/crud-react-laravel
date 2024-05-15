@@ -80,7 +80,9 @@ export const Signup: React.FC = () => {
                 placeholder="Подтверждение пароля"
                 passwordShow={true}
             />
-            <ButtonSubmit loading={loading} text="Создать" />
+            <div className="mb-4">
+                <ButtonSubmit loading={loading} text="Создать" />
+            </div>
             <p className="text-black text-base">
                 Есть аккаунт?{" "}
                 <Link

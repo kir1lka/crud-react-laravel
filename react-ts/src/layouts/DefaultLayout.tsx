@@ -3,6 +3,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { getUser } from "../store/userSlice";
 import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
 
 export const DefaultLayout: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -20,11 +21,19 @@ export const DefaultLayout: React.FC = () => {
     }
 
     return (
-        <div className="max-w-screen-xl mx-auto">
-            <Header />
-            <main>
-                <Outlet />
-            </main>
+        <div className="max-w-screen-xl mx-auto ">
+            <div className="h-screen flex flex-col">
+                <Header />
+                <div className="flex-grow">
+                    <main>
+                        <Outlet />
+                    </main>
+                </div>
+
+                <div className="mt-auto">
+                    <Footer />
+                </div>
+            </div>
 
             {/* notification */}
             {/* {notification && (

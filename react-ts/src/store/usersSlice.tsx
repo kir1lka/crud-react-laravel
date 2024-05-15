@@ -50,6 +50,39 @@ export const getUsers = createAsyncThunk<
         return rejectWithValue(error.message);
     }
 });
+
+export const getUsersShow = createAsyncThunk<
+    User | null,
+    string | undefined | null,
+    { rejectValue: string }
+>("users/getUsersShow", async function (id, { rejectWithValue }) {
+    try {
+        if (id) {
+            const response = await axiosManager.get(`/users/${id}`);
+            return response.data;
+        }
+        return null;
+    } catch (error: any) {
+        return rejectWithValue(error.message);
+    }
+});
+
+export const usersDelete = createAsyncThunk<
+    number | null,
+    number,
+    { rejectValue: string }
+>("users/deleteUser", async function (id, { rejectWithValue }) {
+    try {
+        if (id) {
+            await axiosManager.delete(`/users/${id}`);
+            return id;
+        }
+        return null;
+    } catch (error: any) {
+        return rejectWithValue(error.message);
+    }
+});
+
 const usersSlice = createSlice({
     name: "users",
     initialState,
@@ -71,6 +104,35 @@ const usersSlice = createSlice({
                 state.loading = false;
 
                 state.error = action.payload;
+            })
+
+            // getUserShow
+            .addCase(getUsersShow.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(getUsersShow.fulfilled, (state, action) => {
+                state.loading = false;
+                state.error = null;
+                if (action.payload) {
+                    state.users.data = [action.payload];
+                } else {
+                    state.users.data = [];
+                }
+            })
+            .addCase(getUsersShow.rejected, (state, action) => {
+                state.loading = false;
+
+                state.error = action.payload;
+            })
+
+            //delteUsers
+            .addCase(usersDelete.fulfilled, (state, action) => {
+                if (action.payload) {
+                    state.users.data = state.users.data.filter(
+                        (user) => user.id !== action.payload
+                    );
+                }
             });
     },
 });

@@ -5,6 +5,8 @@ type InputProps = {
     type: string;
     placeholder: string;
     passwordShow?: boolean;
+    valueText?: string;
+    onChange?: (ev: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const Input: React.FC<InputProps> = ({
@@ -12,6 +14,8 @@ export const Input: React.FC<InputProps> = ({
     type,
     placeholder,
     passwordShow = false,
+    valueText = undefined,
+    onChange,
 }) => {
     const [showPassword, setShowPassword] = useState(false);
 
@@ -49,6 +53,8 @@ export const Input: React.FC<InputProps> = ({
                 {!passwordShow && (
                     <input
                         ref={inputRef}
+                        value={valueText}
+                        onChange={onChange}
                         type={type}
                         placeholder={placeholder}
                         className="bg-white w-full border-2 border-gray-300 p-4  box-border  rounded-lg focus:outline-2 focus:outline-violet-600 pr-12 text-base"

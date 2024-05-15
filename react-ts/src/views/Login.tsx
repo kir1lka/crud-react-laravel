@@ -68,7 +68,9 @@ export const Login: React.FC = () => {
                 placeholder="Пароль"
                 passwordShow={true}
             />
-            <ButtonSubmit loading={loading} text="Войти" />
+            <div className="mb-4">
+                <ButtonSubmit loading={loading} text="Войти" />
+            </div>
             <p className="text-black text-base">
                 Нет аккаунта?{" "}
                 <Link

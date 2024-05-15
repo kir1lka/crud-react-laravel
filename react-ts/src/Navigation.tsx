@@ -6,6 +6,7 @@ import { Login } from "./views/Login";
 import { Signup } from "./views/Signup";
 import { Users } from "./views/Users";
 import { Dashboard } from "./views/Dashboard";
+import { UserForm } from "./views/UserForm";
 
 const RouterNav = createBrowserRouter([
     {
@@ -15,8 +16,8 @@ const RouterNav = createBrowserRouter([
             { path: "/", element: <Navigate to="/users" /> },
             { path: "/users", element: <Users /> },
             { path: "/dashboard", element: <Dashboard /> },
-            //   { path: "/users/new", element: <UserForm key="userCreate" /> },
-            //   { path: "/users/:id", element: <UserForm key="userUpdate" /> },
+            { path: "/users/new", element: <UserForm key="userCreate" /> },
+            { path: "/users/:id", element: <UserForm key="userUpdate" /> },
         ],
     },
 

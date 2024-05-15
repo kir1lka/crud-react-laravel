@@ -1,15 +1,33 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { TitlePage } from "../components/TitlePage";
-import { useAppSelector } from "../hooks";
+import { useAppDispatch, useAppSelector } from "../hooks";
 import { Pagination } from "../components/Pagination";
 import { IoPersonAddSharp } from "react-icons/io5";
+import { usersDelete } from "../store/usersSlice";
 
 export const Users: React.FC = () => {
+    const dispatch = useAppDispatch();
     const users = useAppSelector((state) => state.users);
+
+    const onClickDelete = (id: number) => {
+        if (
+            !window.confirm(
+                "Вы уверены, что хотите удалить этого пользователя?"
+            )
+        ) {
+            return;
+        }
+
+        dispatch(usersDelete(id));
+    };
 
     return (
         <div className="animated fadeInDown">
-            <TitlePage textTitle="Пользователи" visibleButton={true}>
+            <TitlePage
+                textTitle="Пользователи"
+                visibleButton={true}
+                toLinkButton="/users/new"
+            >
                 <IoPersonAddSharp className="text-2xl" />
             </TitlePage>
 
@@ -57,15 +75,17 @@ export const Users: React.FC = () => {
                                     </td>
                                     <td className="py-2 whitespace-nowrap border-b-2 text-base">
                                         <Link
-                                            // to={"/users/" + user.id}
-                                            to={"/users"}
+                                            to={"/users/" + user.id}
+                                            // to={"/users"}
                                             className="py-3 px-4  rounded-md font-semibold bg-yellow-500 text-white hover:bg-yellow-600 hover:text-white transition-all duration-200 border-2 border-yellow-600 hover:border-yellow-700"
                                         >
                                             Редактировать
                                         </Link>
                                         &nbsp;
                                         <button
-                                            // onClick={() => onClickDelete(user)}
+                                            onClick={() =>
+                                                onClickDelete(user.id)
+                                            }
                                             className="py-3 px-4  rounded-md font-semibold bg-red-600 text-white border-2 border-red-700 hover:bg-red-700 hover:text-white transition-all duration-200 hover:border-red-800"
                                         >
                                             Удалить
