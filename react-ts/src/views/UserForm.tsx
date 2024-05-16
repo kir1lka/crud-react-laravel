@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { TitlePage } from "../components/TitlePage";
 import { Input } from "../components/Input";
 import { ButtonSubmit } from "../components/ButtonSubmit";
@@ -6,39 +6,23 @@ import { useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { getUsersShow } from "../store/usersSlice";
 
-// interface UsersState {
-//     users: {
-//         data: User[];
-//     };
-//     meta: {
-//         current_page: number;
-//         per_page: number;
-//         last_page: number;
-//     };
-//     loading: boolean;
-//     error: string | null | undefined;
-// }
-
-interface UserFormState {
-    id: number | null;
-    name: string;
-    email: string;
-    password: string;
-    password_confirmation: string;
-}
-
 export const UserForm: React.FC = () => {
+    const navigate = useNavigate();
+
     const dispatch = useAppDispatch();
     // let user = useAppSelector((state) => state.users);
     let currentUser = useAppSelector((state) => state.users);
     let loading = useAppSelector((state) => state.users.loading);
 
-    const [user, setUser] = useState<UserFormState>({
-        id: null,
+    const [user, setUser] = useState<User>({
+        id: 0,
         name: "",
         email: "",
         password: "",
         password_confirmation: "",
+        email_verified_at: "",
+        created_at: "",
+        updated_at: "",
     });
 
     const { id } = useParams();
@@ -57,23 +41,51 @@ export const UserForm: React.FC = () => {
                 email: currentUser.users.data[0]?.email,
                 password: "",
                 password_confirmation: "",
+                email_verified_at: "",
+                created_at: "",
+                updated_at: "",
             });
         }
 
         // setUser(currentUser);
     }, [id, dispatch]);
 
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        if (user.id) {
+            // axiosManager
+            //     .put(`/users/${user.id}`, user)
+            //     .then(() => {
+            //         setNotification("Пользователь был обновлен!");
+            //         navigate("/users");
+            //     })
+            //     .catch((err) => {
+            //         const res = err.response;
+            //         if (res && res.status === 422) {
+            //             setErrors(err.response.data.errors);
+            //         }
+            //     });
+            navigate("/users");
+        } else {
+            // axiosManager
+            //     .post(`/users`, user)
+            //     .then(() => {
+            //         setNotification("Пользователь был создан!");
+            //         navigate("/users");
+            //     })
+            //     .catch((err) => {
+            //         const res = err.response;
+            //         if (res && res.status === 422) {
+            //             setErrors(err.response.data.errors);
+            //         }
+            //     });
+            navigate("/users");
+        }
+    };
+
     return (
         <div className="animated fadeInDown">
-            {/* {user?.users.data[0]?.id && (
-                <TitlePage
-                    textTitle={`Редактирование пользователя: ${
-                        user.loading === true
-                            ? " Загрузка..."
-                            : user.users.data[0]?.name
-                    }`}
-                />
-            )} */}
             {user?.id && (
                 <TitlePage
                     textTitle={`Редактирование пользователя: ${
@@ -85,10 +97,7 @@ export const UserForm: React.FC = () => {
             <div className="bg-white rounded-lg py-6 px-6 border-2 border-gray-300 shadow-sm mb-4  flex ">
                 <div className="w-3/5">
                     {/* {!loading && ( */}
-                    <form
-                        // onSubmit={onSubmit}
-                        className=""
-                    >
+                    <form onSubmit={onSubmit} className="">
                         <Input
                             inputRef={nameRef}
                             valueText={user.name}
