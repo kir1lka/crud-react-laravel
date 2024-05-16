@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { TitlePage } from "../components/TitlePage";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { Pagination } from "../components/Pagination";

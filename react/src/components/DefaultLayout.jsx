@@ -33,7 +33,7 @@ export default function DefaultLayout() {
                 <div className="flex items-center ">
                     <NavLink
                         to="/"
-                        className="uppercase font-extrabold text-5xl text-purple-500"
+                        className="uppercase font-extrabold text-5xl text-violet-500 hover:text-violet-600 "
                     >
                         swydd
                     </NavLink>
