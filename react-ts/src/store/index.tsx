@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import authReducer from "./authSlice";
 import userReducer from "./userSlice";
 import usersReducer from "./usersSlice";
+import modaReducer from "./modalSlice";
 
 import {
     persistStore,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
     auth: authReducer,
     user: userReducer,
     users: usersReducer,
+    modal: modaReducer,
 });
 
 const persistConfig = {

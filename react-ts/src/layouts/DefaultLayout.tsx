@@ -4,11 +4,13 @@ import { useAppDispatch, useAppSelector } from "../hooks";
 import { getUser } from "../store/userSlice";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
+import { Modal } from "../components/Modal";
 
 export const DefaultLayout: React.FC = () => {
     const dispatch = useAppDispatch();
     const user = useAppSelector((state) => state.user);
     const token = useAppSelector((state) => state.auth.accessToken);
+    const modal = useAppSelector((state) => state.modal);
 
     useEffect(() => {
         if (!user.user) {
@@ -22,6 +24,8 @@ export const DefaultLayout: React.FC = () => {
 
     return (
         <div className="max-w-screen-xl mx-auto ">
+            {modal.isOpen && <Modal />}
+
             <div className="h-screen flex flex-col">
                 <Header />
                 <div className="flex-grow">

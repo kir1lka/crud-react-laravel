@@ -86,14 +86,14 @@ export const UserForm: React.FC = () => {
 
     return (
         <div className="animated fadeInDown">
-            {user?.id && (
+            {user.id !== 0 && (
                 <TitlePage
                     textTitle={`Редактирование пользователя: ${
-                        loading === true ? " Загрузка..." : user.name
+                        loading ? " Загрузка..." : user.name
                     }`}
                 />
             )}
-            {!user?.id && <TitlePage textTitle="Добавление пользователя" />}
+            {!user.id && <TitlePage textTitle="Добавление пользователя" />}
             <div className="bg-white rounded-lg py-6 px-6 border-2 border-gray-300 shadow-sm mb-4  flex ">
                 <div className="w-3/5">
                     {/* {!loading && ( */}

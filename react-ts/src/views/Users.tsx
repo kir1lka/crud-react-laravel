@@ -3,22 +3,16 @@ import { TitlePage } from "../components/TitlePage";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { Pagination } from "../components/Pagination";
 import { IoPersonAddSharp } from "react-icons/io5";
-import { usersDelete } from "../store/usersSlice";
+import Moment from "moment";
+import { openModal } from "../store/modalSlice";
+import { TableSkeleton } from "../skeletons/TableSkeleton";
 
 export const Users: React.FC = () => {
     const dispatch = useAppDispatch();
     const users = useAppSelector((state) => state.users);
 
     const onClickDelete = (id: number) => {
-        if (
-            !window.confirm(
-                "Вы уверены, что хотите удалить этого пользователя?"
-            )
-        ) {
-            return;
-        }
-
-        dispatch(usersDelete(id));
+        dispatch(openModal(id));
     };
 
     return (
@@ -44,15 +38,8 @@ export const Users: React.FC = () => {
                         </tr>
                     </thead>
 
-                    {users.loading && (
-                        <tbody className="p-2 whitespace-nowrap border-b-2">
-                            <tr className="p-2 whitespace-nowrap border-b-2">
-                                <td className="p-2 whitespace-nowrap border-b-2 ">
-                                    Загрузка...
-                                </td>
-                            </tr>
-                        </tbody>
-                    )}
+                    {/* {users.loading && ( */}
+                    {users.loading && <TableSkeleton />}
 
                     {!users.loading && (
                         <tbody className="p-2 whitespace-nowrap border-b-2">
@@ -71,7 +58,9 @@ export const Users: React.FC = () => {
                                         {user.email}
                                     </td>
                                     <td className="py-2 whitespace-nowrap border-b-2 text-base">
-                                        {user.created_at}
+                                        {Moment(user.created_at).format(
+                                            "DD.MM.YYYY - hh:mm"
+                                        )}
                                     </td>
                                     <td className="py-2 whitespace-nowrap border-b-2 text-base">
                                         <Link
@@ -86,6 +75,9 @@ export const Users: React.FC = () => {
                                             onClick={() =>
                                                 onClickDelete(user.id)
                                             }
+                                            // onClick={() =>
+                                            //     dispatch(openModal())
+                                            // }
                                             className="py-3 px-4  rounded-md font-semibold bg-red-600 text-white border-2 border-red-700 hover:bg-red-700 hover:text-white transition-all duration-200 hover:border-red-800"
                                         >
                                             Удалить
