@@ -39,7 +39,7 @@ export const Users: React.FC = () => {
                     </thead>
 
                     {/* {users.loading && ( */}
-                    {true && <TableSkeleton />}
+                    {users.loading && <TableSkeleton />}
 
                     {!users.loading && (
                         <tbody className="p-2 whitespace-nowrap border-b-2">

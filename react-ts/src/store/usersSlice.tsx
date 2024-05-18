@@ -83,6 +83,48 @@ export const usersDelete = createAsyncThunk<
     }
 });
 
+export const updateUser = createAsyncThunk<User, User, { rejectValue: string }>(
+    "users/updateUser",
+    async function (user, { rejectWithValue }) {
+        try {
+            const response = await axiosManager.put(`/users/${user.id}`, user);
+            return response.data;
+        } catch (error: any) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+// export const createUser = createAsyncThunk<
+//     User,
+//     Omit<User, "id" | "created_at" | "updated_at">,
+//     { rejectValue: string }
+// >("users/createUser", async function (user, { rejectWithValue }) {
+//     try {
+//         const response = await axiosManager.post(`/users`, user);
+//         return response.data;
+//     } catch (error: any) {
+//         return rejectWithValue(error.message);
+//     }
+// });
+
+export const createUser = createAsyncThunk<
+    User,
+    Omit<User, "id" | "created_at" | "updated_at">,
+    { rejectValue: any }
+>("users/createUser", async function (user, { rejectWithValue }) {
+    try {
+        const response = await axiosManager.post(`/users`, user);
+        return response.data;
+    } catch (error: any) {
+        if (error.response && error.response.status === 422) {
+            return rejectWithValue(error.response.data);
+        } else {
+            return rejectWithValue(error.message);
+        }
+    }
+});
+
 const usersSlice = createSlice({
     name: "users",
     initialState,
@@ -132,6 +174,64 @@ const usersSlice = createSlice({
                     state.users.data = state.users.data.filter(
                         (user) => user.id !== action.payload
                     );
+                }
+            })
+
+            //updateUser
+            .addCase(updateUser.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(updateUser.fulfilled, (state, action) => {
+                state.loading = false;
+                state.error = null;
+
+                const index = state.users.data.findIndex(
+                    (u) => u.id === action.payload.id
+                );
+                if (index !== -1) {
+                    state.users.data[index] = action.payload;
+                }
+            })
+            .addCase(updateUser.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+
+            //createUser
+            .addCase(createUser.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(createUser.fulfilled, (state, action) => {
+                state.loading = false;
+                state.error = null;
+
+                state.users.data.push(action.payload);
+            })
+            // .addCase(createUser.rejected, (state, action) => {
+            //     state.loading = false;
+            //     state.error = action.payload;
+
+            //     console.log(action);
+            // });
+            // .addCase(createUser.rejected, (state, action) => {
+            //     state.loading = false;
+            //     // console.log(action.payload);
+            //     if (action.payload.errors) {
+            //         // console.log(action.payload.errors);
+            //         state.error = action.payload.errors;
+            //     } else {
+            //         state.error = null;
+            //         // console.log(action.payload);
+            //     }
+            // });
+            .addCase(createUser.rejected, (state, action) => {
+                state.loading = false;
+                if (action.payload) {
+                    state.error = action.payload.errors || action.payload;
+                } else {
+                    state.error = action.error.message;
                 }
             });
     },

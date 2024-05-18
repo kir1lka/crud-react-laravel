@@ -31,6 +31,7 @@ export const Input: React.FC<InputProps> = ({
                         <input
                             ref={inputRef}
                             type={showPassword ? "text" : "password"}
+                            onChange={onChange}
                             placeholder={placeholder}
                             className="bg-white w-full border-2 border-gray-300 p-4  box-border rounded-lg focus:outline-2 focus:outline-violet-600 pr-12 text-base"
                         />

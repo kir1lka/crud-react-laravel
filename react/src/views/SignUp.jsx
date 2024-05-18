@@ -39,6 +39,7 @@ export default function SignUp() {
                 if (res && res.status === 422) {
                     //err.response.data.message
                     setErrors(err.response.data.errors);
+                    console.log(err.response.data.errors);
                 }
                 setLoadingResponse(false);
             });

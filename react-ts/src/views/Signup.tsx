@@ -55,6 +55,7 @@ export const Signup: React.FC = () => {
                 const res = err.response;
                 if (res && res.status === 422) {
                     setErrors(err.response.data.errors);
+                    console.log(err.response.data.errors);
                 }
                 setLoading(false);
             });
