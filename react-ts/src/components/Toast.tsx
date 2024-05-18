@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 
-type IconType = "success" | "error";
+type IconType = "success" | "delete";
 
 const icons = {
     success: (
@@ -16,7 +16,7 @@ const icons = {
             </svg>
         </div>
     ),
-    error: (
+    delete: (
         <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg">
             <svg
                 className="w-5 h-5"

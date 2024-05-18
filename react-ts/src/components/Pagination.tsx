@@ -24,11 +24,20 @@ export const Pagination: React.FC<PaginationProps> = ({ users }) => {
 
     //pagination
     const [currentPage, setCurrentPage] = useState(1);
-    const pageNumbers = [...Array(users.meta.per_page + 1).keys()].slice(1);
+    const [pageNumbers, setPageNumbers] = useState<number[]>([]);
 
     useEffect(() => {
         dispatch(getUsers(currentPage));
     }, [currentPage]);
+
+    useEffect(() => {
+        if (users.meta.per_page && users.meta.last_page) {
+            const pages = [...Array(users.meta.last_page).keys()].map(
+                (i) => i + 1
+            );
+            setPageNumbers(pages);
+        }
+    }, [users.meta.per_page, users.meta.last_page]);
 
     const handlePagination = (page: number = 1) => {
         setCurrentPage(page);
