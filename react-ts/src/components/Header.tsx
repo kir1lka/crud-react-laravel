@@ -19,7 +19,7 @@ export const Header: React.FC = () => {
             <div className="flex items-center ">
                 <NavLink
                     to="/"
-                    className="uppercase font-extrabold text-5xl text-violet-500"
+                    className="uppercase font-extrabold text-6xl text-violet-500"
                 >
                     swydd
                 </NavLink>
