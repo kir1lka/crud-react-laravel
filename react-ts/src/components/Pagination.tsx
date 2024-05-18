@@ -41,9 +41,6 @@ export const Pagination: React.FC<PaginationProps> = ({ users }) => {
 
     return (
         <>
-            {/* {users.loading ? (
-                <></>
-            ) : ( */}
             <div className="flex justify-center mb-4">
                 <div className=" py-3 px-3 bg-white shadow-md border-2 border-gray-300 rounded-lg ">
                     <div className=" rounded-md inline-block ">
@@ -90,7 +87,6 @@ export const Pagination: React.FC<PaginationProps> = ({ users }) => {
                     </div>
                 </div>
             </div>
-            {/* )} */}
         </>
     );
 };

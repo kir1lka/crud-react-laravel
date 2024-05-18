@@ -30,4 +30,18 @@ class StoreUserRequest extends FormRequest
             'password' => ['required', 'confirmed', Password::min(8)->letters()->symbols()],
         ];
     }
+
+    /**
+     * Get custom attribute names for validator errors.
+     *
+     * @return array<string, string>
+     */
+    public function attributes()
+    {
+        return [
+            'name' => '«ФИО»',
+            'email' => '«Почта»',
+            'password' => '«Пароль»',
+        ];
+    }
 }

@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosManager from "../axios-client";
+import { showToast } from "../components/Toast";
 
 interface UsersState {
     users: {
@@ -178,6 +179,7 @@ const usersSlice = createSlice({
                     state.users.data = state.users.data.filter(
                         (user) => user.id !== action.payload
                     );
+                    showToast("Пользователь был удален!", "error");
                 }
             })
 
@@ -196,6 +198,7 @@ const usersSlice = createSlice({
                 if (index !== -1) {
                     state.users.data[index] = action.payload;
                 }
+                showToast("Пользователь был обновлен!", "success");
             })
             .addCase(updateUser.rejected, (state, action) => {
                 state.loading = false;
@@ -216,6 +219,7 @@ const usersSlice = createSlice({
                 state.error = null;
 
                 state.users.data.push(action.payload);
+                showToast("Пользователь был создан!", "success");
             })
             .addCase(createUser.rejected, (state, action) => {
                 state.loading = false;

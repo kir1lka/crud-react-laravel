@@ -20,10 +20,7 @@ export const UserForm: React.FC = () => {
     const navigate = useNavigate();
 
     const dispatch = useAppDispatch();
-    // let user = useAppSelector((state) => state.users);
     let currentUser = useAppSelector((state) => state.users);
-    let loading = useAppSelector((state) => state.users.loading);
-    // let error = useAppSelector((state) => state.users.error);
 
     const [user, setUser] = useState<User>({
         id: 0,
@@ -39,6 +36,7 @@ export const UserForm: React.FC = () => {
 
     const { id } = useParams();
 
+    //ref
     const nameRef = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
@@ -68,23 +66,6 @@ export const UserForm: React.FC = () => {
         }
     }, [currentUser.error]);
 
-    // const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    //     e.preventDefault();
-
-    //     if (user.id) {
-    //         dispatch(updateUser(user));
-    //         navigate("/users");
-    //     } else {
-    //         await dispatch(createUser(user));
-    //         // console.log(user);
-    //         if (!currentUser.error) {
-    //             // dispatch(getUser());
-    //             // navigate("/users");
-    //             console.log(currentUser.error);
-    //         }
-    //     }
-    // };
-
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -102,9 +83,7 @@ export const UserForm: React.FC = () => {
         <div className="animated fadeInDown">
             {user.id !== 0 && (
                 <TitlePage
-                    textTitle={`Редактирование пользователя: ${
-                        loading ? " Загрузка..." : user.name
-                    }`}
+                    textTitle={`Редактирование пользователя: ${user.name}`}
                 />
             )}
             {!user.id && <TitlePage textTitle="Добавление пользователя" />}
@@ -114,7 +93,6 @@ export const UserForm: React.FC = () => {
                 </div>
                 <div className="flex ">
                     <div className="w-3/5">
-                        {/* {!loading && ( */}
                         <form onSubmit={onSubmit} className="">
                             <Input
                                 inputRef={nameRef}
@@ -160,26 +138,19 @@ export const UserForm: React.FC = () => {
                             />
                             <div className="w-1/3">
                                 <ButtonSubmit
-                                    loading={false}
+                                    loading={currentUser.loading}
                                     text="Сохранить"
                                 />
                             </div>
                         </form>
-                        {/* )} */}
                     </div>
                     <div className="flex flex-col    items-center w-2/5 h-full">
-                        {/* <div className="flex h-72 w-72 bg-violet-500 rounded-full  justify-center items-center border-4 border-violet-600 mb-4 hover:bg-violet-600 hover:border-violet-700 transition-all duration-200">
-                        <h2 className="text-6xl font-black text-white ">
-                            {user.id ? user?.name.charAt(0).toUpperCase() : "?"}
-                        </h2>
-                    </div> */}
-
                         <div className="ml-4 text-base font-semibold">
                             <p className="mb-4">
                                 Поле «ФИО» содержит полное имя пользователя.
                             </p>
                             <p className="mb-4">
-                                Поле «Почта' содержит электронный адрес
+                                Поле «Почта» содержит электронный адрес
                                 пользователя.
                             </p>
                             <p className="mb-4">

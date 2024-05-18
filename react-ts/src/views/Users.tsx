@@ -65,7 +65,6 @@ export const Users: React.FC = () => {
                                     <td className="py-2 whitespace-nowrap border-b-2 text-base">
                                         <Link
                                             to={"/users/" + user.id}
-                                            // to={"/users"}
                                             className="py-3 px-4  rounded-md font-semibold bg-yellow-500 text-white hover:bg-yellow-600 hover:text-white transition-all duration-200 border-2 border-yellow-600 hover:border-yellow-700"
                                         >
                                             Редактировать
@@ -75,9 +74,6 @@ export const Users: React.FC = () => {
                                             onClick={() =>
                                                 onClickDelete(user.id)
                                             }
-                                            // onClick={() =>
-                                            //     dispatch(openModal())
-                                            // }
                                             className="py-3 px-4  rounded-md font-semibold bg-red-600 text-white border-2 border-red-700 hover:bg-red-700 hover:text-white transition-all duration-200 hover:border-red-800"
                                         >
                                             Удалить
@@ -89,8 +85,9 @@ export const Users: React.FC = () => {
                     )}
                 </table>
             </div>
-
-            <Pagination users={users} />
+            <div className="flex justify-center items-center">
+                <Pagination users={users} />
+            </div>
         </div>
     );
 };

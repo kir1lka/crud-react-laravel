@@ -5,6 +5,9 @@ import { getUser } from "../store/userSlice";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { Modal } from "../components/Modal";
+import { Toaster } from "react-hot-toast";
+
+import "react-toastify/dist/ReactToastify.css";
 
 export const DefaultLayout: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -25,6 +28,7 @@ export const DefaultLayout: React.FC = () => {
     return (
         <div className="max-w-screen-xl mx-auto ">
             {modal.isOpen && <Modal />}
+            <Toaster position="bottom-right" reverseOrder={false} />
 
             <div className="h-screen flex flex-col">
                 <Header />

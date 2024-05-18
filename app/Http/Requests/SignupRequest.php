@@ -39,9 +39,9 @@ class SignupRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => 'ФИО',
-            'email' => 'Почта',
-            'password' => 'Пароль',
+            'name' => '«ФИО»',
+            'email' => '«Почта»',
+            'password' => '«Пароль»',
         ];
     }
 }

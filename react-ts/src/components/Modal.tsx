@@ -37,7 +37,7 @@ export const Modal: React.FC = () => {
                     <div className="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                         <button
                             type="button"
-                            className="w-full inline-flex justify-center rounded-md  border-2 border-red-700 text-base font-semibold  shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 hover:border-red-800  sm:ml-3 sm:w-auto sm:text-sm"
+                            className="w-full inline-flex justify-center rounded-md  border-2 border-red-700 text-base font-semibold  shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 hover:border-red-800  sm:ml-3 sm:w-auto "
                             onClick={() => {
                                 if (id) {
                                     dispatch(usersDelete(id));
@@ -49,7 +49,7 @@ export const Modal: React.FC = () => {
                         </button>
                         <button
                             type="button"
-                            className="mt-3 w-full inline-flex justify-center rounded-md border-2 text-base font-semibold border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                            className="mt-3 w-full inline-flex justify-center rounded-md border-2 text-base font-semibold border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:ml-3 sm:w-auto "
                             onClick={() => dispatch(closeModal())}
                         >
                             Отмена
