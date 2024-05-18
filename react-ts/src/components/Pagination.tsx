@@ -24,7 +24,7 @@ export const Pagination: React.FC<PaginationProps> = ({ users }) => {
 
     //pagination
     const [currentPage, setCurrentPage] = useState(1);
-    const pageNumbers = [...Array(users.meta.per_page - 1).keys()].slice(1);
+    const pageNumbers = [...Array(users.meta.per_page + 1).keys()].slice(1);
 
     useEffect(() => {
         dispatch(getUsers(currentPage));
@@ -60,7 +60,7 @@ export const Pagination: React.FC<PaginationProps> = ({ users }) => {
                                 <button
                                     key={i}
                                     onClick={() => handlePagination(page)}
-                                    className="py-2.5 px-5 text-base bg-violet-300 
+                                    className="h-12 w-12 text-base bg-violet-300 
                                         rounded-lg border-2 mr-2 border-violet-400 text-white hover:bg-violet-600 hover:border-violet-700 hover:text-white font-semibold transition-all duration-100 "
                                     style={{
                                         background:
