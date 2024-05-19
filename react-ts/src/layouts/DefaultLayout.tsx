@@ -42,13 +42,6 @@ export const DefaultLayout: React.FC = () => {
                     <Footer />
                 </div>
             </div>
-
-            {/* notification */}
-            {/* {notification && (
-            <div className=" fixed right-4 bottom-4 z-10 p-4 bg-green-500 text-white rounded-lg">
-                {notification}
-            </div>
-        )} */}
         </div>
     );
 };

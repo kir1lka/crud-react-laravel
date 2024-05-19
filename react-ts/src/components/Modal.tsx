@@ -1,7 +1,3 @@
-// type ErrorListProps = {
-//      errors: ErrorState;
-//  };
-
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { closeModal } from "../store/modalSlice";
 import { usersDelete } from "../store/usersSlice";

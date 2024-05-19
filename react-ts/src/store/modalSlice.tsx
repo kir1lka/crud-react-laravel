@@ -1,4 +1,3 @@
-// import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface ModalState {
@@ -18,7 +17,6 @@ const modalSlice = createSlice({
         openModal: (state, action: PayloadAction<number>) => {
             state.isOpen = true;
             state.id = action.payload;
-            //   console.log(state.isOpen);
         },
         closeModal: (state) => {
             state.isOpen = false;

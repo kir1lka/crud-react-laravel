@@ -100,19 +100,6 @@ export const updateUser = createAsyncThunk<User, User, { rejectValue: any }>(
     }
 );
 
-// export const createUser = createAsyncThunk<
-//     User,
-//     Omit<User, "id" | "created_at" | "updated_at">,
-//     { rejectValue: string }
-// >("users/createUser", async function (user, { rejectWithValue }) {
-//     try {
-//         const response = await axiosManager.post(`/users`, user);
-//         return response.data;
-//     } catch (error: any) {
-//         return rejectWithValue(error.message);
-//     }
-// });
-
 export const createUser = createAsyncThunk<
     User,
     Omit<User, "id" | "created_at" | "updated_at">,
