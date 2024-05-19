@@ -28,7 +28,7 @@ class AuthController extends Controller
         return response([
             'user' => $user,
             'token' => $token,
-        ]); //compact('user','token')
+        ]);
     }
 
     public function signup(SignupRequest $request)
