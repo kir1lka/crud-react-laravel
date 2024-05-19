@@ -166,7 +166,7 @@ const usersSlice = createSlice({
                     state.users.data = state.users.data.filter(
                         (user) => user.id !== action.payload
                     );
-                    showToast("Пользователь был удален!", "delete");
+                    showToast("Пользователь был удален!", "success");
                 }
             })
 

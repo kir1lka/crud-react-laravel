@@ -66,6 +66,7 @@ export const UserForm: React.FC = () => {
         }
     }, [currentUser.error]);
 
+    //functions
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -102,6 +103,7 @@ export const UserForm: React.FC = () => {
                                 }
                                 type="name"
                                 placeholder="ФИО"
+                                autocomplete="off"
                             />
                             <Input
                                 inputRef={emailRef}
@@ -111,6 +113,7 @@ export const UserForm: React.FC = () => {
                                 }
                                 type="email"
                                 placeholder="Почта"
+                                autocomplete="off"
                             />
                             <Input
                                 inputRef={passwordRef}
@@ -123,6 +126,7 @@ export const UserForm: React.FC = () => {
                                     })
                                 }
                                 passwordShow={true}
+                                autocomplete="off"
                             />
                             <Input
                                 inputRef={passwordConfirmationRef}
@@ -135,6 +139,7 @@ export const UserForm: React.FC = () => {
                                     })
                                 }
                                 passwordShow={true}
+                                autocomplete="off"
                             />
                             <div className="w-1/3">
                                 <ButtonSubmit

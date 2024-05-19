@@ -4,10 +4,10 @@ import { useAppDispatch, useAppSelector } from "../hooks";
 import { getUser } from "../store/userSlice";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
-import { Modal } from "../components/Modal";
 import { Toaster } from "react-hot-toast";
 
 import "react-toastify/dist/ReactToastify.css";
+import { Modal } from "../components/Modal";
 
 export const DefaultLayout: React.FC = () => {
     const dispatch = useAppDispatch();
